@@ -2,24 +2,43 @@
 class StatusResourceParser(object):
 
     def parse(self, crsctl_output):
-        crsctl_map = {}
+        result_map = {}
         output_parts = crsctl_output.split('\n\n')
         for part in output_parts:
             part_lines = part.split('\n')
             if part_lines[0].startswith('NAME'):
                 name = part_lines[0].split('=')[1]
                 states = list(map(str.strip, part_lines[3].split('=')[1].split(',')))
-                if name not in crsctl_map:
-                    crsctl_map[name] = {}
+                if name not in result_map:
+                    result_map[name] = {}
                 for state in states:
                     if state.startswith('OFFLINE'):
                         astate = ['OFFLINE', '?']
                     else:
                         astate = list(map(str.strip, state.split('on')))
-                    if astate[0] not in crsctl_map[name]:
-                        crsctl_map[name][astate[0]] = []
-                    crsctl_map[name][astate[0]].append(astate[1])
+                    if astate[0] not in result_map[name]:
+                        result_map[name][astate[0]] = []
+                    result_map[name][astate[0]].append(astate[1])
             else:
                 continue
 
-        return crsctl_map
+        return result_map
+
+
+class CheckCrsParser(object):
+
+    _services = ['Oracle High Availability Services', 'Cluster Ready Services', 'Cluster Synchronization Services', 'Event Manager']
+
+    def parse(self, crsctl_output):
+        result_map = {}
+        lines = crsctl_output.split('\n')
+        for line in lines:
+            for service in self._services:
+                if (service in line) and 'online' in line:
+                    result_map[service] = 'ONLINE'
+
+        for service in self._services:
+            if service not in result_map:
+                result_map[service] = 'OFFLINE'
+
+        return result_map
