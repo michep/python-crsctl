@@ -1,0 +1,104 @@
+NAME=ora.CRSDATA.dg
+TYPE=ora.diskgroup.type
+TARGET=ONLINE          , ONLINE
+STATE=ONLINE on dbrac1, ONLINE on dbrac2
+
+NAME=ora.DATA.dg
+TYPE=ora.diskgroup.type
+TARGET=ONLINE          , ONLINE
+STATE=ONLINE on dbrac1, ONLINE on dbrac2
+
+NAME=ora.LISTENER.lsnr
+TYPE=ora.listener.type
+TARGET=ONLINE          , ONLINE
+STATE=ONLINE on dbrac1, ONLINE on dbrac2
+
+NAME=ora.LISTENER_SCAN1.lsnr
+TYPE=ora.scan_listener.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.LISTENER_SCAN2.lsnr
+TYPE=ora.scan_listener.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.MGMTLSNR
+TYPE=ora.mgmtlsnr.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.VOTENFS.dg
+TYPE=ora.diskgroup.type
+TARGET=ONLINE          , ONLINE
+STATE=ONLINE on dbrac1, ONLINE on dbrac2
+
+NAME=ora.asm
+TYPE=ora.asm.type
+TARGET=ONLINE          , ONLINE
+STATE=ONLINE on dbrac1, ONLINE on dbrac2
+
+NAME=ora.cvu
+TYPE=ora.cvu.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.dbrac1.vip
+TYPE=ora.cluster_vip_net1.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac1
+
+NAME=ora.dbrac2.vip
+TYPE=ora.cluster_vip_net1.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.mgmtdb
+TYPE=ora.mgmtdb.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.net1.network
+TYPE=ora.network.type
+TARGET=ONLINE          , ONLINE
+STATE=ONLINE on dbrac1, ONLINE on dbrac2
+
+NAME=ora.oc4j
+TYPE=ora.oc4j.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac1
+
+NAME=ora.ons
+TYPE=ora.ons.type
+TARGET=ONLINE          , ONLINE
+STATE=ONLINE on dbrac1, ONLINE on dbrac2
+
+NAME=ora.scan1.vip
+TYPE=ora.scan_vip.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.scan2.vip
+TYPE=ora.scan_vip.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.testdb.db
+TYPE=ora.database.type
+TARGET=ONLINE          , ONLINE
+STATE=ONLINE on dbrac1, ONLINE on dbrac2
+
+NAME=ora.testdb.testdbinst1.svc
+TYPE=ora.service.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.testdb.testdbinst2.svc
+TYPE=ora.service.type
+TARGET=ONLINE
+STATE=ONLINE on dbrac2
+
+NAME=ora.testdb.testdbsrv.svc
+TYPE=ora.service.type
+TARGET=ONLINE          , ONLINE
+STATE=ONLINE on dbrac1, ONLINE on dbrac2
