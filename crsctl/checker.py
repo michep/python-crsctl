@@ -6,6 +6,9 @@ class StatusResourceChecker(object):
         nodes = cconfig.pop('nodes')
         for cfg in cconfig:
             opt = cconfig[cfg]
+            if 'ONLINE' not in crsctl[cfg]:
+                result['False'].append(cfg)
+                continue
             online = crsctl[cfg]['ONLINE']
             if opt == 'all':
                 res = self._checkALL(nodes, online)

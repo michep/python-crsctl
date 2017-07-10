@@ -9,11 +9,14 @@ class StatusResourceParser(object):
             if part_lines[0].startswith('NAME'):
                 name = part_lines[0].split('=')[1]
                 states = list(map(str.strip, part_lines[3].split('=')[1].split(',')))
-                if not name in crsctl_map:
+                if name not in crsctl_map:
                     crsctl_map[name] = {}
                 for state in states:
-                    astate = list(map(str.strip, state.split('on')))
-                    if not astate[0] in crsctl_map[name]:
+                    if state.startswith('OFFLINE'):
+                        astate = ['OFFLINE', '?']
+                    else:
+                        astate = list(map(str.strip, state.split('on')))
+                    if astate[0] not in crsctl_map[name]:
                         crsctl_map[name][astate[0]] = []
                     crsctl_map[name][astate[0]].append(astate[1])
             else:
