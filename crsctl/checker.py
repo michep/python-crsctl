@@ -7,6 +7,9 @@ class StatusResourceChecker(object):
             if cfg == 'nodes':
                 continue
             opt = config[cfg]
+            if cfg not in crsctl:
+                result['False'].append(cfg)
+                continue
             if 'ONLINE' not in crsctl[cfg]:
                 result['False'].append(cfg)
                 continue

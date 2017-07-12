@@ -1,4 +1,3 @@
-
 class StatusResourceParser(object):
 
     def parse(self, crsctl_output):
