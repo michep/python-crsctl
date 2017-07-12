@@ -27,7 +27,8 @@ class StatusResourceParser(object):
 
 class CheckCrsParser(object):
 
-    _services = ['Oracle High Availability Services', 'Cluster Ready Services', 'Cluster Synchronization Services', 'Event Manager']
+    _services = {'Oracle High Availability Services': 'HAS', 'Cluster Ready Services': 'CRS',
+                 'Cluster Synchronization Services': 'CSS', 'Event Manager': 'EM'}
 
     def parse(self, crsctl_output):
         result_map = {}
@@ -35,10 +36,10 @@ class CheckCrsParser(object):
         for line in lines:
             for service in self._services:
                 if (service in line) and 'online' in line:
-                    result_map[service] = 'ONLINE'
+                    result_map[self._services[service]] = 'ONLINE'
 
         for service in self._services:
-            if service not in result_map:
-                result_map[service] = 'OFFLINE'
+            if self._services[service] not in result_map:
+                result_map[self._services[service]] = 'OFFLINE'
 
         return result_map

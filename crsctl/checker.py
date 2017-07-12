@@ -2,10 +2,11 @@ class StatusResourceChecker(object):
 
     def check(self, config, crsctl):
         result = {'True':[], 'False':[]}
-        cconfig = config.copy()
-        nodes = cconfig.pop('nodes')
-        for cfg in cconfig:
-            opt = cconfig[cfg]
+        nodes = config['nodes']
+        for cfg in config:
+            if cfg == 'nodes':
+                continue
+            opt = config[cfg]
             if 'ONLINE' not in crsctl[cfg]:
                 result['False'].append(cfg)
                 continue
@@ -33,3 +34,15 @@ class StatusResourceChecker(object):
             if node not in nodes:
                 return False
         return True
+
+
+class CheckCrsChecker(object):
+
+    def check(self, crsctl):
+        result = {'True':[], 'False':[]}
+        for service in crsctl:
+            if crsctl[service] == 'ONLINE':
+                result['True'].append(service)
+            else:
+                result['False'].append(service)
+        return result
