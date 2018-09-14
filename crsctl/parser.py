@@ -14,7 +14,7 @@ class StatusResourceParser(object):
                     if state.startswith('OFFLINE'):
                         astate = ['OFFLINE', '?']
                     else:
-                        astate = list(map(str.strip, state.split('on')))
+                        astate = list(map(str.strip, state.split(' on ')))
                     if astate[0] not in result_map[name]:
                         result_map[name][astate[0]] = []
                     result_map[name][astate[0]].append(astate[1])
